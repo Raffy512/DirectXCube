@@ -13,7 +13,7 @@ cbuffer PerObject : register( b2 )
     matrix worldMatrix;
 }
 
-float3 LightPosition = float3(-1, 0, -1);
+float3 LightPosition = float3(0.0f,0.0f, -10.0f);
 float LightRange = 100;
 
 struct AppData
@@ -41,7 +41,7 @@ VertexShaderOutput SimpleVertexShader( AppData IN )
     OUT.position = mul( mvp, float4( IN.position, 1.0f ) );
     OUT.normal = mul(IN.normal, (float3x3)worldMatrix).xyz;
     OUT.light = LightPosition - posWorld.xyz;
-    OUT.color = float4( 0,0,0,0 );
+    OUT.color = float4( IN.color, 0 );
 
     return OUT;
 }

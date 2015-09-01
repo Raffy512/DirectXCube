@@ -67,54 +67,6 @@ struct VertexPosColor
 
 VertexPosColor Vertices[] = 
 {
-    { XMFLOAT3( -1.0f, -1.0f, -1.0f ), XMFLOAT3( 0.0f, 0.0f, 0.0f ) }, // 0
-    { XMFLOAT3( -1.0f,  1.0f, -1.0f ), XMFLOAT3( 0.0f, 1.0f, 0.0f ) }, // 1
-    { XMFLOAT3(  1.0f,  1.0f, -1.0f ), XMFLOAT3( 1.0f, 1.0f, 0.0f ) }, // 2
-
-    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, 0.0f) }, // 0
-    { XMFLOAT3(1.0f,  1.0f, -1.0f), XMFLOAT3(1.0f, 1.0f, 0.0f) }, // 2
-    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) }, // 3
-
-    { XMFLOAT3(-1.0f, -1.0f,  1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, // 4
-    { XMFLOAT3(1.0f,  1.0f,  1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, // 6
-    { XMFLOAT3(-1.0f,  1.0f,  1.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) }, // 5
-
-    { XMFLOAT3(-1.0f, -1.0f,  1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, // 4
-    { XMFLOAT3(1.0f, -1.0f,  1.0f), XMFLOAT3(1.0f, 0.0f, 1.0f) },  // 7
-    { XMFLOAT3(1.0f,  1.0f,  1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, // 6
-
-    { XMFLOAT3(-1.0f, -1.0f,  1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, // 4
-    { XMFLOAT3(-1.0f,  1.0f,  1.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) }, // 5
-    { XMFLOAT3(-1.0f,  1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) }, // 1
-
-    { XMFLOAT3(-1.0f, -1.0f,  1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, // 4
-    { XMFLOAT3(-1.0f,  1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) }, // 1
-    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, 0.0f) }, // 0
-
-    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) }, // 3
-    { XMFLOAT3(1.0f,  1.0f, -1.0f), XMFLOAT3(1.0f, 1.0f, 0.0f) }, // 2
-    { XMFLOAT3(1.0f,  1.0f,  1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, // 6
-
-    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) }, // 3
-    { XMFLOAT3(1.0f,  1.0f,  1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, // 6
-    { XMFLOAT3(1.0f, -1.0f,  1.0f), XMFLOAT3(1.0f, 0.0f, 1.0f) },  // 7
-
-    { XMFLOAT3(-1.0f,  1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) }, // 1
-    { XMFLOAT3(-1.0f,  1.0f,  1.0f), XMFLOAT3(0.0f, 1.0f, 1.0f) }, // 5
-    { XMFLOAT3(1.0f,  1.0f,  1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, // 6
-
-    { XMFLOAT3(-1.0f,  1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) }, // 1
-    { XMFLOAT3(1.0f,  1.0f,  1.0f), XMFLOAT3(1.0f, 1.0f, 1.0f) }, // 6
-    { XMFLOAT3(1.0f,  1.0f, -1.0f), XMFLOAT3(1.0f, 1.0f, 0.0f) }, // 2
-
-    { XMFLOAT3(-1.0f, -1.0f,  1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, // 4
-    { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, 0.0f) }, // 0
-    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) }, // 3
-
-    { XMFLOAT3(-1.0f, -1.0f,  1.0f), XMFLOAT3(0.0f, 0.0f, 1.0f) }, // 4
-    { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(1.0f, 0.0f, 0.0f) }, // 3
-    { XMFLOAT3(1.0f, -1.0f,  1.0f), XMFLOAT3(1.0f, 0.0f, 1.0f) }  // 7
-
     //{ XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f, 0.0f, 0.0f) }, // 0
     //{ XMFLOAT3(-1.0f,  1.0f, -1.0f), XMFLOAT3(0.0f, 1.0f, 0.0f) }, // 1
     //{ XMFLOAT3(1.0f,  1.0f, -1.0f), XMFLOAT3(1.0f, 1.0f, 0.0f) }, // 2
@@ -124,6 +76,54 @@ VertexPosColor Vertices[] =
     //{ XMFLOAT3(  1.0f,  1.0f,  1.0f ), XMFLOAT3( 1.0f, 1.0f, 1.0f ) }, // 6
     //{ XMFLOAT3(  1.0f, -1.0f,  1.0f ), XMFLOAT3( 1.0f, 0.0f, 1.0f ) }  // 7
 
+
+  { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(-1.0f,-1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+
+  { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(-1.0f, -1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+
+  { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f,-0.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f,-0.0f) },
+  { XMFLOAT3(-1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f,-0.0f) },
+
+  { XMFLOAT3(-1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f, -0.0f) },
+  { XMFLOAT3(-1.0f,1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f, -0.0f) },
+  { XMFLOAT3(-1.0f,-1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f, -0.0f) },
+
+  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-0.0f,1.0f) },
+  { XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-0.0f,1.0f) },
+  { XMFLOAT3(-1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-0.0f,1.0f) },
+
+  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,0.0f,1.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,0.0f,1.0f) },
+  { XMFLOAT3(-1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,0.0f,1.0f) },
+
+  { XMFLOAT3(1.0f,-1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,-0.0f,0.0f) },
+  { XMFLOAT3(1.0f,1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,-0.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,-0.0f,0.0f) },
+
+  { XMFLOAT3(1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+
+  { XMFLOAT3(1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+  { XMFLOAT3(-1.0f,1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+
+  { XMFLOAT3(-1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+
+  { XMFLOAT3(1.0f, -1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
+
+  { XMFLOAT3(1.0f, -1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) }
 };
 
 WORD Indicies[] = 
@@ -576,7 +576,7 @@ bool LoadContent()
     float clientWidth = static_cast<float>( clientRect.right - clientRect.left );
     float clientHeight = static_cast<float>( clientRect.bottom - clientRect.top );
 
-    ProjectionMatrix = XMMatrixPerspectiveFovLH( XMConvertToRadians(45.0f), clientWidth/clientHeight, 0.1f, 100.0f );
+    ProjectionMatrix = XMMatrixPerspectiveFovLH( XMConvertToRadians(35.0f), clientWidth/clientHeight, 0.1f, 100.0f );
 
     d3dDeviceContext->UpdateSubresource( d3dConstantBuffers[CB_Appliation], 0, nullptr, &ProjectionMatrix, 0, 0 );
 
@@ -863,7 +863,7 @@ void Update(  float deltaTime )
 
     static float angle = 0.0f;
     angle += 90.0f * deltaTime;
-    XMVECTOR rotationAxis = XMVectorSet( 0, 1, 1, 0 );
+    XMVECTOR rotationAxis = XMVectorSet(0.2, 1, 0, 0 );
     
     WorldMatrix = XMMatrixRotationAxis( rotationAxis, XMConvertToRadians(angle) );
     d3dDeviceContext->UpdateSubresource( d3dConstantBuffers[CB_Object], 0, nullptr, &WorldMatrix, 0, 0 );

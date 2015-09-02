@@ -9,7 +9,7 @@ using namespace DirectX;
 const LONG WindowWidth = 1280;
 const LONG WindowHeight = 720;
 LPCSTR WindowClassName = "DirectXWindowClass";
-LPCSTR WindowName = "DirectX Template";
+LPCSTR WindowName = "3DEngine";
 HWND WindowHandle = 0;
 
 const BOOL EnableVSync = FALSE;
@@ -52,17 +52,18 @@ enum ConstanBuffer
 
 ID3D11Buffer* d3dConstantBuffers[NumConstantBuffers];
 
-// Demo parameters
+
 XMMATRIX WorldMatrix;
 XMMATRIX ViewMatrix;
 XMMATRIX ProjectionMatrix;
+XMMATRIX ModelMatrix;
 
 // Vertex data for a colored cube.
 struct VertexPosColor
 {
-    XMFLOAT3 Position;
+    XMFLOAT3 Position; 
     XMFLOAT3 Color;
-    XMFLOAT3 Normal;
+    XMFLOAT3 Normal;       
 };
 
 VertexPosColor Vertices[] = 
@@ -77,53 +78,53 @@ VertexPosColor Vertices[] =
     //{ XMFLOAT3(  1.0f, -1.0f,  1.0f ), XMFLOAT3( 1.0f, 0.0f, 1.0f ) }  // 7
 
 
-  { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
-  { XMFLOAT3(1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
-  { XMFLOAT3(-1.0f,-1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) }, 
+  { XMFLOAT3(1.0f, -1.0f,-1.0f), XMFLOAT3(1.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(-1.0f,-1.0f,-1.0f), XMFLOAT3(1.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
 
-  { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
-  { XMFLOAT3(-1.0f, -1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
-  { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(-1.0f, -1.0f,-1.0f), XMFLOAT3(1.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, -1.0f), XMFLOAT3(1.0f,0.0f,0.0f), XMFLOAT3(0.0f,0.0f,-1.0f) },
 
-  { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f,-0.0f) },
-  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f,-0.0f) },
-  { XMFLOAT3(-1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f,-0.0f) },
+  { XMFLOAT3(-1.0f, -1.0f,1.0f), XMFLOAT3(0.0f,1.0f,0.0f), XMFLOAT3(-1.0f,0.0f,0.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,1.0f,0.0f), XMFLOAT3(-1.0f,0.0f,0.0f) },
+  { XMFLOAT3(-1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,1.0f,0.0f), XMFLOAT3(-1.0f,0.0f,0.0f) },
 
-  { XMFLOAT3(-1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f, -0.0f) },
-  { XMFLOAT3(-1.0f,1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f, -0.0f) },
-  { XMFLOAT3(-1.0f,-1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-1.0f,-0.0f, -0.0f) },
+  { XMFLOAT3(-1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,1.0f,0.0f), XMFLOAT3(-1.0f,0.0f, 0.0f) },
+  { XMFLOAT3(-1.0f,1.0f, -1.0f), XMFLOAT3(0.0f,1.0f,0.0f), XMFLOAT3(-1.0f,0.0f, 0.0f) },
+  { XMFLOAT3(-1.0f,-1.0f,-1.0f), XMFLOAT3(0.0f,1.0f,0.0f), XMFLOAT3(-1.0f,0.0f, 0.0f) },
 
-  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-0.0f,1.0f) },
-  { XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-0.0f,1.0f) },
-  { XMFLOAT3(-1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-0.0f,1.0f) },
+  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,1.0f), XMFLOAT3(0.0f,0.0f,1.0f) },
+  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,1.0f), XMFLOAT3(0.0f,0.0f,1.0f) },
+  { XMFLOAT3(-1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,1.0f), XMFLOAT3(0.0f,0.0f,1.0f) },
 
-  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,0.0f,1.0f) },
-  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,0.0f,1.0f) },
-  { XMFLOAT3(-1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,0.0f,1.0f) },
+  { XMFLOAT3( 1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,1.0f), XMFLOAT3(0.0f,0.0f,1.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,1.0f), XMFLOAT3(0.0f,0.0f,1.0f) },
+  { XMFLOAT3(-1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,1.0f), XMFLOAT3(0.0f,0.0f,1.0f) },
 
-  { XMFLOAT3(1.0f,-1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,-0.0f,0.0f) },
-  { XMFLOAT3(1.0f,1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,-0.0f,0.0f) },
-  { XMFLOAT3(1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,-0.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f,-1.0f), XMFLOAT3(1.0f,1.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+  { XMFLOAT3(1.0f, 1.0f,-1.0f), XMFLOAT3(1.0f,1.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(1.0f,1.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
 
-  { XMFLOAT3(1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
-  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
-  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+  { XMFLOAT3(1.0f, 1.0f,-1.0f), XMFLOAT3(1.0f,1.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f,1.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(1.0f,1.0f,0.0f), XMFLOAT3(1.0f,0.0f,0.0f) },
 
-  { XMFLOAT3(1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
-  { XMFLOAT3(-1.0f,1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
-  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+  { XMFLOAT3(1.0f, 1.0f,-1.0f), XMFLOAT3(1.0f,0.0f,1.0f), XMFLOAT3(0.0f,1.0f,0.0f) },
+  { XMFLOAT3(-1.0f,1.0f,-1.0f), XMFLOAT3(1.0f,0.0f,1.0f), XMFLOAT3(0.0f,1.0f,0.0f) },
+  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f,0.0f,1.0f), XMFLOAT3(0.0f,1.0f,0.0f) },
 
-  { XMFLOAT3(-1.0f, 1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
-  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
-  { XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(0.0f,1.0f,-0.0f) },
+  { XMFLOAT3(-1.0f, 1.0f,-1.0f), XMFLOAT3(1.0f,0.0f,1.0f), XMFLOAT3(0.0f,1.0f,0.0f) },
+  { XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f,0.0f,1.0f), XMFLOAT3(0.0f,1.0f,0.0f) },
+  { XMFLOAT3( 1.0f, 1.0f, 1.0f), XMFLOAT3(1.0f,0.0f,1.0f), XMFLOAT3(0.0f,1.0f,0.0f) },
 
-  { XMFLOAT3(1.0f, -1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
-  { XMFLOAT3(1.0f,-1.0f,1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
-  { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f,-1.0f), XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(1.0f,-1.0f, 1.0f), XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(-1.0f,-1.0f,1.0f), XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,-1.0f,0.0f) },
 
-  { XMFLOAT3(1.0f, -1.0f,-1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
-  { XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) },
-  { XMFLOAT3(-1.0f, -1.0f, -1.0f), XMFLOAT3(0.0f,0.0f,0.0f), XMFLOAT3(-0.0f,-1.0f,0.0f) }
+  { XMFLOAT3(1.0f, -1.0f,-1.0f), XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(-1.0f,-1.0f, 1.0f), XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,-1.0f,0.0f) },
+  { XMFLOAT3(-1.0f,-1.0f,-1.0f), XMFLOAT3(1.0f,1.0f,1.0f), XMFLOAT3(0.0f,-1.0f,0.0f) }
 };
 
 WORD Indicies[] = 
@@ -488,6 +489,7 @@ bool LoadContent()
     constantBufferDesc.ByteWidth = sizeof( XMMATRIX );
     constantBufferDesc.CPUAccessFlags = 0;
     constantBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+    
 
     hr = d3dDevice->CreateBuffer( &constantBufferDesc, nullptr, &d3dConstantBuffers[CB_Appliation] );
     if ( FAILED(hr) )
@@ -532,9 +534,10 @@ bool LoadContent()
     // Create the input layout for the vertex shader.
     D3D11_INPUT_ELEMENT_DESC vertexLayoutDesc[] = 
     {
-        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(VertexPosColor,Position), D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, offsetof(VertexPosColor,Color), D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "NORMAL", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0 offsetof(VertexPosColor,Normal), D3D11_INPUT_PER_VERTEX_DATA, }
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "COLOR", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+        
     };
 
     hr = d3dDevice->CreateInputLayout( vertexLayoutDesc, _countof(vertexLayoutDesc), vertexShaderBlob->GetBufferPointer(), vertexShaderBlob->GetBufferSize(), &d3dInputLayout );
@@ -579,6 +582,8 @@ bool LoadContent()
     ProjectionMatrix = XMMatrixPerspectiveFovLH( XMConvertToRadians(35.0f), clientWidth/clientHeight, 0.1f, 100.0f );
 
     d3dDeviceContext->UpdateSubresource( d3dConstantBuffers[CB_Appliation], 0, nullptr, &ProjectionMatrix, 0, 0 );
+
+    ModelMatrix = XMMatrixIdentity();
 
     return true;
 }
@@ -761,7 +766,7 @@ int Run()
     MSG msg = {0};
 
     static DWORD previousTime = timeGetTime();
-    static const float targetFramerate = 30.0f;
+    static const float targetFramerate = 60.0f;
     static const float maxTimeStep = 1.0f / targetFramerate;
 
     while ( msg.message != WM_QUIT )
@@ -862,11 +867,14 @@ void Update(  float deltaTime )
 
 
     static float angle = 0.0f;
-    angle += 90.0f * deltaTime;
-    XMVECTOR rotationAxis = XMVectorSet(0.2, 1, 0, 0 );
+    angle += 360.0f * deltaTime;
+    XMVECTOR rotationAxis = XMVectorSet(0.2, 1, 0,0 );
     
     WorldMatrix = XMMatrixRotationAxis( rotationAxis, XMConvertToRadians(angle) );
     d3dDeviceContext->UpdateSubresource( d3dConstantBuffers[CB_Object], 0, nullptr, &WorldMatrix, 0, 0 );
+
+    
+
 }
 
 // Clear the color and depth buffers.

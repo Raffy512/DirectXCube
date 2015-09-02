@@ -1,0 +1,29 @@
+﻿Build started 02/09/2015 18:48:59.
+     1>Project "C:\Users\raffy_000\Documents\GitHubVisualStudio\DirectXCube\DirectX11Cube\DirectXTemplate\DirectXTemplate.vcxproj" on node 2 (Build target(s)).
+     1>FxCompile:
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\fxc.exe /nologo /E"SimplePixelShader" /T ps_4_0 /Fh "inc/SimplePixelShader.h" /Fo "bin\SimplePixelShader.cso" /Vn "g_SimplePixelShader" data\Shaders\SimplePixelShader.hlsl 
+         compilation header save succeeded; see C:\Users\raffy_000\Documents\GitHubVisualStudio\DirectXCube\DirectX11Cube\DirectXTemplate\inc\SimplePixelShader.h
+         compilation object save succeeded; see C:\Users\raffy_000\Documents\GitHubVisualStudio\DirectXCube\DirectX11Cube\DirectXTemplate\bin\SimplePixelShader.cso
+         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\fxc.exe /nologo /E"SimpleVertexShader" /T vs_4_0 /Fh "inc/SimpleVertexShader.h" /Fo "bin\SimpleVertexShader.cso" /Vn "g_SimpleVertexShader" data\Shaders\SimpleVertexShader.hlsl 
+         compilation header save succeeded; see C:\Users\raffy_000\Documents\GitHubVisualStudio\DirectXCube\DirectX11Cube\DirectXTemplate\inc\SimpleVertexShader.h
+         compilation object save succeeded; see C:\Users\raffy_000\Documents\GitHubVisualStudio\DirectXCube\DirectX11Cube\DirectXTemplate\bin\SimpleVertexShader.cso
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Iinc /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"DirectXInclude.h" /Fp"Release\3DEngine.pch" /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt src\DirectXInclude.cpp
+         DirectXInclude.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Iinc /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"DirectXInclude.h" /Fp"Release\3DEngine.pch" /Fo"Release\\" /Fd"Release\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt src\main.cpp
+         main.cpp
+     1>src\main.cpp(871): warning C4305: 'argument': truncation from 'double' to 'float'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"bin\3DEngine.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"bin\3DEngine.pdb" /OPT:REF /OPT:ICF /LTCG:incremental /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"bin\3DEngine.lib" /MACHINE:X86 /SAFESEH Release\DirectXInclude.obj
+         Release\main.obj
+         Generating code
+         67 of 69 functions (97.1%) were compiled, the rest were copied from previous compilation.
+           5 functions were new in current compilation
+           0 functions had inline decision re-evaluated but remain unchanged
+         Finished generating code
+         DirectXTemplate.vcxproj -> C:\Users\raffy_000\Documents\GitHubVisualStudio\DirectXCube\DirectX11Cube\DirectXTemplate\bin\3DEngine.exe
+     1>Done Building Project "C:\Users\raffy_000\Documents\GitHubVisualStudio\DirectXCube\DirectX11Cube\DirectXTemplate\DirectXTemplate.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.19

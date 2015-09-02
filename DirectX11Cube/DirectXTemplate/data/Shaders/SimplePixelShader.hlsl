@@ -1,21 +1,26 @@
-float3 LightPosition = float3(0.0f, 0.0f, -10.0f);
-float LightRange = 100;
+//float lightRange = 100;
 
 struct PixelShaderInput
 {
-    float4 color : COLOR;
-    float3 light     : TEXCOORD0;
-    float3 normal    : NORMAL;
+  float4 position : SV_POSITION;
+  float4 color : COLOR;
+  float3 normal : NORMAL;
+  float3 light     : TEXCOORD0;
 };
 
 float4 SimplePixelShader( PixelShaderInput IN ) : SV_TARGET
-{
-    float attenuation = saturate(1 - dot(IN.light / LightRange, IN.light / LightRange));
+{   
     
-    float3 Ln = normalize(IN.light);
-    float3 Nn = normalize(IN.normal);
+    float lightRange = 50;
+    float attenuation = saturate(1 - dot(IN.light / lightRange, IN.light / lightRange));
     
-    float3 diffuse = float3(1,1,1) * dot(Ln, Nn) * attenuation;
+    float3 nL = normalize(IN.light);
+    
+    float3 nN = normalize(IN.normal);
+    
+    float3 diffuse = IN.color.rgb * dot(nL, nN) * attenuation;
+    
+    //float4 color = float4(diffuse, 0.0) * IN.color;
 
-    return float4( diffuse,1.0);
-}
+    return float4(diffuse, 1); 
+}  

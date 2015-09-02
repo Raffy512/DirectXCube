@@ -13,8 +13,9 @@ cbuffer PerObject : register( b2 )
     matrix worldMatrix;
 }
 
-float3 LightPosition = float3(0.0f,0.0f, -10.0f);
-float LightRange = 100;
+
+//float3 lightPosition = float3(0.0f, 0.0f, -10.0f);
+
 
 struct AppData
 {
@@ -25,8 +26,8 @@ struct AppData
 
 struct VertexShaderOutput
 {
-    float4 color : COLOR;
     float4 position : SV_POSITION;
+    float4 color : COLOR;    
     float3 normal : NORMAL;
     float3 light     : TEXCOORD0;
 };
@@ -39,9 +40,10 @@ VertexShaderOutput SimpleVertexShader( AppData IN )
 
     matrix mvp = mul( projectionMatrix, mul( viewMatrix, worldMatrix ) );
     OUT.position = mul( mvp, float4( IN.position, 1.0f ) );
-    OUT.normal = mul(IN.normal, (float3x3)worldMatrix).xyz;
-    OUT.light = LightPosition - posWorld.xyz;
-    OUT.color = float4( IN.color, 0 );
+    OUT.normal = mul(IN.normal, (float3x3)viewMatrix).xyz;
+    OUT.color = float4( IN.color, 0.0);
+    OUT.light = float3(0.0f, 0.0f, -10.0f) - posWorld.xyz;
 
-    return OUT;
+    return OUT; 
+    
 }

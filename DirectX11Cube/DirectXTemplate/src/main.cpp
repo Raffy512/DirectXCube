@@ -11,6 +11,7 @@ const LONG WindowHeight = 720;
 LPCSTR WindowClassName = "DirectXWindowClass";
 LPCSTR WindowName = "3DEngine";
 HWND WindowHandle = 0;
+const float fpsLocker = 16.7f;
 
 const BOOL EnableVSync = FALSE;
 
@@ -779,9 +780,14 @@ int Run()
         else
         {
             DWORD currentTime = timeGetTime();
-            float deltaTime = ( currentTime - previousTime ) / 1000.0f;
+            float deltaTime = (currentTime - previousTime) / 1000.0f;
+            
+            while (deltaTime < fpsLocker)
+            {
+              currentTime = timeGetTime();
+              deltaTime = (currentTime - previousTime);
+            }
             previousTime = currentTime;
-
             // Cap the delta time to the max time step (useful if your 
             // debugging and you don't want the deltaTime value to explode.
             deltaTime = std::fmin<float>(deltaTime, maxTimeStep);
